@@ -63,13 +63,13 @@ public class CategoriaController {
 	
 	@DeleteMapping("/{id}/deletar")
 	public ResponseEntity<Object> deletarCategoria (@PathVariable Long id){
-		Optional<Categoria> produtoExistente = repository.findById(id);
+		Optional<Categoria> categoriaExistente = repository.findById(id);
 		
-		if(produtoExistente.isPresent()) {
+		if(categoriaExistente.isPresent()) {
 			repository.deleteById(id);
 			return ResponseEntity.status(200).body("Categoria deletada");
 		} else {
-			return ResponseEntity.status(200).body("Essa Categoria ainda não existe!");
+			return ResponseEntity.status(200).body("Parece que a categoria que você está tentando deletar não existe!");
 		}
 	}
 	
