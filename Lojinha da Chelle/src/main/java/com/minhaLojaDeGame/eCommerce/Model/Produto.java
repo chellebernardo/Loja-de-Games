@@ -1,6 +1,4 @@
 package com.minhaLojaDeGame.eCommerce.Model;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table (name = "tb_produto")
@@ -26,11 +26,12 @@ public class Produto {
 		private String nome;
 
 		@NotNull
-		@Column(name = "Descricao", length = 600)
+		@Column (name = "Descricao", length = 600)
 		private String descricao;
 		
-		@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-		@JoinColumn(name = "produtos")
+		@ManyToOne (fetch = FetchType.EAGER)
+		@JoinColumn (name = "produtos")
+		@JsonIgnoreProperties ("meusProdutos")
 		private Categoria categoria;
 
 		public Long getId() {
