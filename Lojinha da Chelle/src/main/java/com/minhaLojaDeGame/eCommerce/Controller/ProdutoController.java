@@ -30,7 +30,13 @@ public class ProdutoController {
 	
 	@GetMapping ("/todes")
 	private ResponseEntity<List<Produto>> buscarTodes (){
-		return ResponseEntity.status(200).body(repository.findAll());
+		List <Produto> listaProdutos = repository.findAll();
+		
+		if (listaProdutos.isEmpty()) {
+			return ResponseEntity.status(204).build();
+		} else {
+			return ResponseEntity.status(200).body(listaProdutos);
+		}
 	}
 	
 	@PostMapping ("/cadastrar")

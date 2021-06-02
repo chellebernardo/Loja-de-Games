@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.minhaLojaDeGame.eCommerce.Model.Categoria;
 import com.minhaLojaDeGame.eCommerce.Repository.CategoriaRepository;
 import com.minhaLojaDeGame.eCommerce.Service.CategoriaService;
@@ -30,7 +31,13 @@ public class CategoriaController {
 	
 	@GetMapping ("/todes")
 	private ResponseEntity<List<Categoria>> buscarTodes (){
-		return ResponseEntity.status(200).body(repository.findAll());
+		List <Categoria> listaCategoria = repository.findAll();
+		
+		if (listaCategoria.isEmpty()) {
+			return ResponseEntity.status(204).build();
+		} else {
+			return ResponseEntity.status(200).body(listaCategoria);
+		}
 	}
 	
 	@GetMapping("/{id}")
